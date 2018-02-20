@@ -1,7 +1,7 @@
-ubuntu php7.0 apache
+ubuntu php5.6 apache
 ============
 
-FROM php:7.0-apache 
+FROM php:5.6-apache 
 
 Used as a base image for Galleon.PH Projects
 
