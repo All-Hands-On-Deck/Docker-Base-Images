@@ -3,15 +3,17 @@ MAINTAINER Andre Marcelo-Tanner <andre@galleon.ph>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Update APT
+RUN apt-get update
+
 # Install utility software
-RUN apt-get update \
-    && apt-get install -y \
-       git \
-       wget \
-       lsb-release \
-       apt-transport-https \
-       ssl-cert \
-       vim-tiny \
+RUN apt-get install -y \
+		git \
+		wget \
+		lsb-release \
+		apt-transport-https \
+		ssl-cert \
+		vim-tiny \
     && curl -LO https://dev.mysql.com/get/mysql-apt-config_0.8.8-1_all.deb \
     && dpkg -i mysql-apt-config_0.8.8-1_all.deb \
     && rm mysql-apt-config_0.8.8-1_all.deb
@@ -27,7 +29,7 @@ RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
 RUN apt-get install -y \
    libmysqlclient-dev
 
-# Install PHP Extensions w/o deps: mbstring, mysqli, opcache, pdo, pdo_mysql, bcmath, json, zip
+# Install PHP Extensions w/o deps: mbstring, mysqli, opcache, pdo, pdo_mysql, bcmath, json
 RUN docker-php-ext-install -j$(nproc) \
     mbstring \
     mysqli \
@@ -35,8 +37,7 @@ RUN docker-php-ext-install -j$(nproc) \
     pdo \
     pdo_mysql \
 	bcmath \
-	json \
-	zip
+	json
 
 # Install PHP Extensions: gd
 RUN apt-get install -y --no-install-recommends \
@@ -48,21 +49,28 @@ RUN apt-get install -y --no-install-recommends \
 		gd \
 		--with-freetype-dir=/usr/include \
 		--with-jpeg-dir=/usr/include \
-	&& RUN docker-php-ext-install -j$(nproc) \
+	&& docker-php-ext-install -j$(nproc) \
 		gd \
+	&& apt-get autoremove -y
+
+# Install PHP Extensions: zip
+RUN apt-get install -y --no-install-recommends \
+		zlib1g-dev \
+	&& docker-php-ext-install -j$(nproc) \
+		zip \
 	&& apt-get autoremove -y
 
 # Install PHP Extensions: xml
 RUN apt-get install -y --no-install-recommends \
 		libxml2-dev \
-	&& RUN docker-php-ext-install -j$(nproc) \
+	&& docker-php-ext-install -j$(nproc) \
 		xml \
 	&& apt-get autoremove -y
 
 # Install PHP Extensions: bz2
 RUN apt-get install -y --no-install-recommends \
 		libbz2-dev \
-	&& RUN docker-php-ext-install -j$(nproc) \
+	&& docker-php-ext-install -j$(nproc) \
 		bz2 \
 	&& apt-get autoremove -y
 
