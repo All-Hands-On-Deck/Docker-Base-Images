@@ -11,6 +11,7 @@ RUN apt-get update \
        apt-transport-https \
        ssl-cert \
        supervisor \
+       gnupg \
     && curl -LO https://dev.mysql.com/get/mysql-apt-config_0.8.8-1_all.deb \
     && dpkg -i mysql-apt-config_0.8.8-1_all.deb \
     && rm mysql-apt-config_0.8.8-1_all.deb \
