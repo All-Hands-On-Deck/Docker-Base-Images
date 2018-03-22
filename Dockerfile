@@ -12,9 +12,9 @@ RUN apt-get update \
        ssl-cert \
        supervisor \
        gnupg \
-    && curl -LO https://dev.mysql.com/get/mysql-apt-config_0.8.8-1_all.deb \
-    && dpkg -i mysql-apt-config_0.8.8-1_all.deb \
-    && rm mysql-apt-config_0.8.8-1_all.deb \
+    && curl -LO https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb \
+	&& dpkg -i mysql-apt-config_0.8.9-1_all.deb \
+    && rm mysql-apt-config_0.8.9-1_all.deb \
     && curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - \
     && echo "deb https://deb.nodesource.com/node_6.x $(lsb_release -cs) main" >> /etc/apt/sources.list.d/nodesource.list \
     && apt-get update \
@@ -23,7 +23,7 @@ RUN apt-get update \
        libfontconfig1-dev \
        libfreetype6-dev \
        libjpeg62-turbo-dev \
-       libpng12-dev \
+       libpng-dev \
        libxml2-dev \
        libbz2-dev \
        libmysqlclient-dev \
