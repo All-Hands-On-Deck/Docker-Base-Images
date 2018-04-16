@@ -1,0 +1,75 @@
+[mysqld]
+symbolic-links=0
+
+sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+
+## Time Zone
+default-time-zone = '+08:00'
+
+## Cache
+thread-cache-size               = 16
+table-open-cache                = 4096
+table-definition-cache          = 2048
+query-cache-size                = 8M
+query-cache-limit               = 0
+query-cache-type = 0
+
+## Per-thread Buffers
+sort-buffer-size                = 4M
+read-buffer-size                = 4M
+read-rnd-buffer-size            = 4M
+join-buffer-size                = 4M
+
+## Temp Tables
+tmp-table-size                  = 128M
+max-heap-table-size             = 128M
+
+## Networking
+back-log                        = 100
+max-connections                = 1000
+max-connect-errors              = 10000
+max-allowed-packet              = 1000M
+interactive-timeout             = 3600
+wait-timeout                    = 500
+
+### Storage Engines
+#default-storage-engine         = InnoDB
+#innodb                          = FORCE
+
+## MyISAM
+key-buffer-size                 = 64M
+myisam-sort-buffer-size         = 128M
+
+## InnoDB
+innodb-buffer-pool-size        = 24G
+#innodb-log-file-size           = 100M
+#innodb-log-buffer-size         = 8M
+innodb-file-per-table          = 1
+#innodb-open-files              = 300
+
+## Low Memory Settings for Containers
+innodb_buffer_pool_size=5M
+innodb_log_buffer_size=256K
+query_cache_size=0
+max_connections=10
+key_buffer_size=8
+thread_cache_size=0
+host_cache_size=0
+innodb_ft_cache_size=1600000
+innodb_ft_total_cache_size=32000000
+
+# per thread or per operation settings
+thread_stack=131072
+sort_buffer_size=32K
+read_buffer_size=8200
+read_rnd_buffer_size=8200
+max_heap_table_size=16K
+tmp_table_size=1K
+bulk_insert_buffer_size=0
+join_buffer_size=128
+net_buffer_length=1K
+innodb_sort_buffer_size=64K
+
+#settings that relate to the binary log (if enabled)
+binlog_cache_size=4K
+binlog_stmt_cache_size=4K
